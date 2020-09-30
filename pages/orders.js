@@ -6,15 +6,27 @@ import store from 'store-js';
 const Orders = () => 
     {
         const [orders, setOrders] = useState([]);
+        const [customerName, setCustomerName] = useState('');
 
         useEffect(() => {
             const storeOrders = store.get('orders');
+            const customer = store.get('customer');
+            console.log(storeOrders)
             if(storeOrders.length > 0) setOrders(storeOrders);
+            if(customer) setCustomerName(customer);
         },[]);
         
         return (
             <div>
-                <Page breadcrumbs={[{content: 'Customers', onActionRequired: () => history.back()}]} title="Order List">
+                <Page
+                    breadcrumbs={[{
+                        content: 'Customers', 
+                        //url: '/index'
+                        onAction: () => {
+                            window.history.back();
+                        }
+                        }]}
+                    title={`Order List of ${customerName}`}>
                     <Card>
                     <DataTable
                         columnContentTypes={[

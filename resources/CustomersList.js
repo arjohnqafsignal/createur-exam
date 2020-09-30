@@ -75,6 +75,7 @@ class CustomerList extends React.Component {
         {({ data, loading, error }) => {
           if (loading) { return <div>Loading…</div>; }
           if (error) { return <div>{error.message}</div>; }
+          console.log(data.customers.edges)
           return (
             <Card>
                 <ResourceList
@@ -102,6 +103,7 @@ class CustomerList extends React.Component {
                       media={media}
                       accessibilityLabel={`View details for ${item.node.displayName}`}
                       onClick={() => {
+                        const customer = item.node.displayName;
                         const orders = item.node.orders.edges;
                         const rowOrders = orders.map(order => {
                             const fullPaid  = (order.node.fullyPaid) ? "PAID" : "PENDING";
@@ -118,6 +120,7 @@ class CustomerList extends React.Component {
                             return row;
                         })
                         store.set('orders', rowOrders);
+                        store.set('customer', customer);
                         redirectToOrders();
                       }
                       }
@@ -125,6 +128,7 @@ class CustomerList extends React.Component {
                         <h3>
                             <TextStyle variation="strong">{item.node.displayName}</TextStyle>
                         </h3>
+                        <div>Total Orders: {item.node.ordersCount}</div>
                     </ResourceList.Item>
                   );
                 }}
