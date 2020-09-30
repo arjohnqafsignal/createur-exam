@@ -10,7 +10,7 @@ const Orders = () =>
 
         useEffect(() => {
             const storeOrders = store.get('orders');
-            const customer = store.get('customer');
+            //const customer = store.get('customer');
             console.log(storeOrders)
             if(storeOrders.length > 0) setOrders(storeOrders);
             if(customer) setCustomerName(customer);

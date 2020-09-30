@@ -75,7 +75,7 @@ class CustomerList extends React.Component {
         {({ data, loading, error }) => {
           if (loading) { return <div>Loading…</div>; }
           if (error) { return <div>{error.message}</div>; }
-          console.log(data.customers.edges)
+          //console.log(data.customers.edges)
           return (
             <Card>
                 <ResourceList
